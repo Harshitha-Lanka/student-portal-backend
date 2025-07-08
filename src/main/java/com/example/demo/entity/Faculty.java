@@ -64,8 +64,7 @@ public class Faculty {
 	public Faculty(String facultyId) {
 	    this.facultyId = facultyId;
 	}
-	 public Faculty() {
-	    }
+	
 	public void setFacultyId(String facultyId) {
 		this.facultyId = facultyId;
 	}
