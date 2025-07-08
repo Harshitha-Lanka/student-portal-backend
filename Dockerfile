@@ -1,11 +1,22 @@
-# Use a lightweight OpenJDK image
-FROM openjdk:17-jdk-slim
+# Build Stage
+FROM maven:3.9.3-eclipse-temurin-17 AS build
 
-# Set the working directory inside the container
+# Set working directory inside the image
 WORKDIR /app
 
-# Copy the jar file into the container
-COPY target/student-management-portal-0.0.1-SNAPSHOT.jar app.jar
+# Copy source code into the image
+COPY . .
 
-# Run the jar file
+# Build the application using Maven
+RUN mvn clean package -DskipTests
+
+# Run Stage
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copy the built jar from the previous stage
+COPY --from=build /app/target/student-management-portal-0.0.1-SNAPSHOT.jar app.jar
+
+# Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
