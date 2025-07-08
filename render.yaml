@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: student-portal-backend
+    env: java
+    buildCommand: "mvn package"
+    startCommand: "java -jar target/student-management-portal-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://dpg-d1mgs2adbo4c73fa3rl0-a.frankfurt-postgres.render.com:5432/student_management_portal
+      - key: SPRING_DATASOURCE_USERNAME
+        value: student_management_portal_user
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: kKwKnp8SiDb1Swvbr4i0GpxyxlyF8cvm
