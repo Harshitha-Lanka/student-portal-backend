@@ -19,7 +19,7 @@ public class Attendance {
     private String studentId;   
 
     @Column(name="course_id")
-    private String courseId;    // FK (character varying)
+    private String courseId;    
 
     @Column(name="attendance_date")
     private LocalDate date;

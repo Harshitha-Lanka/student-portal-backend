@@ -23,26 +23,33 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private CourseRepository courseRepository;
 
     @Override
+   
     public Enrollment enrollStudent(String studentId, Integer courseId) {
         Student student = studentRepository.findByStudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
-        Course course = courseRepository.findById(courseId)
+        Course course = courseRepository.findBycourseId(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        // ✅ Check if already enrolled
+        Optional<Enrollment> existing = enrollmentRepository.findByStudent_StudentIdAndCourse_CourseId(studentId, courseId);
+        if (existing.isPresent()) {
+            throw new RuntimeException("Student already enrolled in this course");
+        }
 
         Enrollment enrollment = new Enrollment();
         enrollment.setStudent(student);
         enrollment.setCourse(course);
+
         return enrollmentRepository.save(enrollment);
     }
-
     @Override
     public List<Enrollment> getEnrollmentsByStudentId(String studentId) {
         return enrollmentRepository.findByStudentStudentId(studentId);
     }
     @Override
-    public List<Map<String, String>> getStudentDetailsByCourse(String courseId) {
-        List<Enrollment> enrollments = enrollmentRepository.findByCourseId(courseId);
+    public List<Map<String, String>> getStudentDetailsByCourse(Integer courseId) {
+    	List<Enrollment> enrollments = enrollmentRepository.findByCourse_CourseId(courseId);
         List<Map<String, String>> studentList = new ArrayList<>();
 
         for (Enrollment e : enrollments) {

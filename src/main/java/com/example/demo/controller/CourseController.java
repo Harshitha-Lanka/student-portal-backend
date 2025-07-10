@@ -23,6 +23,9 @@ public class CourseController {
     // ✅ Faculty adds a course
     @PostMapping
     public ResponseEntity<?> addCourse(@RequestBody Course course) {
+    	if (course.getCourseCode() == null || course.getCourseCode().isBlank()) {
+    	    return ResponseEntity.badRequest().body("Course Code is required");
+    	}
         if (course.getFaculty() == null || course.getFaculty().getFacultyId() == null) {
             return ResponseEntity.badRequest().body("Faculty ID is required");
         }

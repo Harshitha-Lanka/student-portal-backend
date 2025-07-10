@@ -1,14 +1,14 @@
 package com.example.demo.entity;
 import jakarta.persistence.*;
 
-import lombok.NoArgsConstructor;
+
 import lombok.AllArgsConstructor;
 
 
 @Entity
 
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Table(name="faculty")
 public class Faculty {
 	
@@ -48,7 +48,9 @@ public class Faculty {
 	 @ManyToOne
 	 @JoinColumn(name = "user_id")
 	    private Users user;
-
+	 public Faculty() {
+		   
+		}
 	public Integer getId() {
 		return id;
 	}

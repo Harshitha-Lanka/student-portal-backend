@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public class Enrollment {
 
     @Id
-    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String enrollmentId;
+    @Column(name="enrollment_id")
+    private Integer enrollmentId;
 
     @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")
@@ -21,11 +21,11 @@ public class Enrollment {
 
     private LocalDate enrollmentDate = LocalDate.now();
 
-	public String  getEnrollmentId() {
+	public Integer  getEnrollmentId() {
 		return enrollmentId;
 	}
 
-	public void setEnrollmentId(String enrollmentId) {
+	public void setEnrollmentId(Integer enrollmentId) {
 		this.enrollmentId = enrollmentId;
 	}
 

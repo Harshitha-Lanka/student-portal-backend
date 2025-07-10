@@ -1,13 +1,10 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "course")
@@ -16,7 +13,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
-    private String id;
+    private Integer courseId;
 
     @Column(name = "course_name")
     private String courseName;
@@ -24,13 +21,13 @@ public class Course {
     @Column(name = "course_code")
     private String courseCode;
 
-    @Column(name="department")
+    @Column(name = "department")
     private String department;
-    
-    @Column(name="semester")
+
+    @Column(name = "semester")
     private Integer semester;
-    
-    @Column(name="credits")
+
+    @Column(name = "credits")
     private Integer credits;
 
     @Column(name = "duration_weeks")
@@ -38,20 +35,18 @@ public class Course {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
- 
     private Faculty faculty;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-	public String getId() {
-		return id;
-	}
+    public Integer getcourseId() {
+        return courseId;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
+    public void setcourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
 	public String getCourseName() {
 		return courseName;
 	}
@@ -115,5 +110,6 @@ public class Course {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-  
+
+   
 }
